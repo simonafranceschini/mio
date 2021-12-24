@@ -1,0 +1,831 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "43931695-00b7-459f-9441-a4ed45794e3e",
+   "metadata": {},
+   "source": [
+    "_CORSIVO_\n",
+    "**GRASSETTO**\n",
+    "1. A\n",
+    "2. A\n",
+    "3. C\n",
+    "ELENCO PUNTATO\n",
+    "- A\n",
+    "- B\n",
+    "- C PUNTINI\n",
+    "\n",
+    "___ \n",
+    "LINEA ORIZZONTALE\n",
+    "\n",
+    "# titolo\n",
+    "## titoletto\n",
+    "### titolettino"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "b731af91-bfcf-49f1-81db-40f4af9c9f9a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "5482a9bf-f58e-4cbc-bc00-98210d81fce3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[1;31mType:\u001b[0m        module\n",
+       "\u001b[1;31mString form:\u001b[0m <module 'numpy' from 'C:\\\\Users\\\\franc\\\\miniconda3\\\\envs\\\\myenv\\\\lib\\\\site-packages\\\\numpy\\\\__init__.py'>\n",
+       "\u001b[1;31mFile:\u001b[0m        c:\\users\\franc\\miniconda3\\envs\\myenv\\lib\\site-packages\\numpy\\__init__.py\n",
+       "\u001b[1;31mDocstring:\u001b[0m  \n",
+       "NumPy\n",
+       "=====\n",
+       "\n",
+       "Provides\n",
+       "  1. An array object of arbitrary homogeneous items\n",
+       "  2. Fast mathematical operations over arrays\n",
+       "  3. Linear Algebra, Fourier Transforms, Random Number Generation\n",
+       "\n",
+       "How to use the documentation\n",
+       "----------------------------\n",
+       "Documentation is available in two forms: docstrings provided\n",
+       "with the code, and a loose standing reference guide, available from\n",
+       "`the NumPy homepage <https://www.scipy.org>`_.\n",
+       "\n",
+       "We recommend exploring the docstrings using\n",
+       "`IPython <https://ipython.org>`_, an advanced Python shell with\n",
+       "TAB-completion and introspection capabilities.  See below for further\n",
+       "instructions.\n",
+       "\n",
+       "The docstring examples assume that `numpy` has been imported as `np`::\n",
+       "\n",
+       "  >>> import numpy as np\n",
+       "\n",
+       "Code snippets are indicated by three greater-than signs::\n",
+       "\n",
+       "  >>> x = 42\n",
+       "  >>> x = x + 1\n",
+       "\n",
+       "Use the built-in ``help`` function to view a function's docstring::\n",
+       "\n",
+       "  >>> help(np.sort)\n",
+       "  ... # doctest: +SKIP\n",
+       "\n",
+       "For some objects, ``np.info(obj)`` may provide additional help.  This is\n",
+       "particularly true if you see the line \"Help on ufunc object:\" at the top\n",
+       "of the help() page.  Ufuncs are implemented in C, not Python, for speed.\n",
+       "The native Python help() does not know how to view their help, but our\n",
+       "np.info() function does.\n",
+       "\n",
+       "To search for documents containing a keyword, do::\n",
+       "\n",
+       "  >>> np.lookfor('keyword')\n",
+       "  ... # doctest: +SKIP\n",
+       "\n",
+       "General-purpose documents like a glossary and help on the basic concepts\n",
+       "of numpy are available under the ``doc`` sub-module::\n",
+       "\n",
+       "  >>> from numpy import doc\n",
+       "  >>> help(doc)\n",
+       "  ... # doctest: +SKIP\n",
+       "\n",
+       "Available subpackages\n",
+       "---------------------\n",
+       "doc\n",
+       "    Topical documentation on broadcasting, indexing, etc.\n",
+       "lib\n",
+       "    Basic functions used by several sub-packages.\n",
+       "random\n",
+       "    Core Random Tools\n",
+       "linalg\n",
+       "    Core Linear Algebra Tools\n",
+       "fft\n",
+       "    Core FFT routines\n",
+       "polynomial\n",
+       "    Polynomial tools\n",
+       "testing\n",
+       "    NumPy testing tools\n",
+       "f2py\n",
+       "    Fortran to Python Interface Generator.\n",
+       "distutils\n",
+       "    Enhancements to distutils with support for\n",
+       "    Fortran compilers support and more.\n",
+       "\n",
+       "Utilities\n",
+       "---------\n",
+       "test\n",
+       "    Run numpy unittests\n",
+       "show_config\n",
+       "    Show numpy build configuration\n",
+       "dual\n",
+       "    Overwrite certain functions with high-performance SciPy tools.\n",
+       "    Note: `numpy.dual` is deprecated.  Use the functions from NumPy or Scipy\n",
+       "    directly instead of importing them from `numpy.dual`.\n",
+       "matlib\n",
+       "    Make everything matrices.\n",
+       "__version__\n",
+       "    NumPy version string\n",
+       "\n",
+       "Viewing documentation using IPython\n",
+       "-----------------------------------\n",
+       "Start IPython with the NumPy profile (``ipython -p numpy``), which will\n",
+       "import `numpy` under the alias `np`.  Then, use the ``cpaste`` command to\n",
+       "paste examples into the shell.  To see which functions are available in\n",
+       "`numpy`, type ``np.<TAB>`` (where ``<TAB>`` refers to the TAB key), or use\n",
+       "``np.*cos*?<ENTER>`` (where ``<ENTER>`` refers to the ENTER key) to narrow\n",
+       "down the list.  To view the docstring for a function, use\n",
+       "``np.cos?<ENTER>`` (to view the docstring) and ``np.cos??<ENTER>`` (to view\n",
+       "the source code).\n",
+       "\n",
+       "Copies vs. in-place operation\n",
+       "-----------------------------\n",
+       "Most of the functions in `numpy` return a copy of the array argument\n",
+       "(e.g., `np.sort`).  In-place versions of these functions are often\n",
+       "available as array methods, i.e. ``x = np.array([1,2,3]); x.sort()``.\n",
+       "Exceptions to this rule are documented.\n"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "np?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "2b02a954-7b3f-4f3b-97ab-072632a30718",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.zeros(10, dtype=int)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "9daeec20-5ccf-437e-bb5f-e39cc06e3775",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[1., 1., 1., 1., 1.],\n",
+       "       [1., 1., 1., 1., 1.],\n",
+       "       [1., 1., 1., 1., 1.]])"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.ones((3,5), dtype= float) #float vuol dire decimale"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "6722c511-fc43-4f8f-b9ea-fc7d8214b627",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[3.14, 3.14, 3.14, 3.14, 3.14],\n",
+       "       [3.14, 3.14, 3.14, 3.14, 3.14],\n",
+       "       [3.14, 3.14, 3.14, 3.14, 3.14]])"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.full((3,5),3.14)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "59bce5ee-edd6-4059-b443-f212a83dfb71",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18])"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.arange(0,20,2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "4eeccc66-99ce-4eff-bfed-2ab468dad53f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[[1, 1, 1],\n",
+       "        [1, 1, 1],\n",
+       "        [1, 1, 1]],\n",
+       "\n",
+       "       [[1, 1, 1],\n",
+       "        [1, 1, 1],\n",
+       "        [1, 1, 1]],\n",
+       "\n",
+       "       [[1, 1, 1],\n",
+       "        [1, 1, 1],\n",
+       "        [1, 1, 1]]])"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.ones((3,3,3),dtype=int)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "f7a4cd2a-0688-4bfa-ad09-5f80add7dd80",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0.  , 0.25, 0.5 , 0.75, 1.  ])"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.linspace(0,1,5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "a54f4cbe-9f28-4726-bd39-8a7fa5bc338b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[0.08325523, 0.11058936, 0.10358699],\n",
+       "       [0.97767443, 0.30138811, 0.62214055],\n",
+       "       [0.95571448, 0.1934943 , 0.79020022]])"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.random.random((3,3))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "ea5f273d-1b72-4a32-b1b0-3866f5a1a139",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[-0.56056401,  0.32612494, -1.76389213],\n",
+       "       [ 1.92367724, -2.92571441, -1.26473372],\n",
+       "       [ 0.17831562,  0.40121668,  0.67180304]])"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.random.normal(0,1,(3,3))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "d1ed2d90-9f76-423e-9e41-07875cc2d9ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[7, 7, 0],\n",
+       "       [4, 9, 2],\n",
+       "       [2, 7, 9]])"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.random.randint(0,10,(3,3))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "05ef5119-9318-4b35-b1d7-efa22f421816",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[1., 0., 0.],\n",
+       "       [0., 1., 0.],\n",
+       "       [0., 0., 1.]])"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.eye(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "9c9290c3-fdf7-4810-b016-c05248aff2e4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.random.seed(0) #primo valore casuale da cui poi si generano gli altri"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "86147c6d-d922-4b54-a264-cda24b35b2ef",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x1= np.random.randint(10, size=6)\n",
+    "x2= np.random.randint(10, size=(3,4))\n",
+    "x3= np.random.randint(10, size=(3,4,5))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "433e2695-e69d-4d3a-b254-326b9f3058fd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([5, 0, 3, 3, 7, 9])"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "fdcde9f9-d946-49eb-a485-b1d950304079",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[3, 5, 2, 4],\n",
+       "       [7, 6, 8, 8],\n",
+       "       [1, 6, 7, 7]])"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "259b6357-d667-4141-ac1a-4d1d4da5815c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[[8, 1, 5, 9, 8],\n",
+       "        [9, 4, 3, 0, 3],\n",
+       "        [5, 0, 2, 3, 8],\n",
+       "        [1, 3, 3, 3, 7]],\n",
+       "\n",
+       "       [[0, 1, 9, 9, 0],\n",
+       "        [4, 7, 3, 2, 7],\n",
+       "        [2, 0, 0, 4, 5],\n",
+       "        [5, 6, 8, 4, 1]],\n",
+       "\n",
+       "       [[4, 9, 8, 1, 1],\n",
+       "        [7, 9, 9, 3, 6],\n",
+       "        [7, 2, 0, 3, 5],\n",
+       "        [9, 4, 4, 6, 4]]])"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "8d23fccb-c209-43dd-96ed-c14b0ddb8abd",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "x3 ndim:  3\n",
+      "x3 shape:  (3, 4, 5)\n",
+      "x3 size:  60\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"x3 ndim: \", x3.ndim)\n",
+    "print(\"x3 shape: \", x3.shape)\n",
+    "print(\"x3 size: \",x3.size)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "62541b6d-7994-4ee9-8c1e-061bf632a084",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "itemsize: 4 bytes\n",
+      "nbytes: 240 bytes\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"itemsize:\", x3.itemsize, \"bytes\")\n",
+    "print(\"nbytes:\", x3.nbytes, \"bytes\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "0ad29a5c-aeb1-4514-935c-3237534422af",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[3, 5, 2, 4],\n",
+       "       [7, 6, 8, 8],\n",
+       "       [1, 6, 7, 7]])"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "55dfe158-80f7-433a-8865-c2057c654300",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "3"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2[0,0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "0ad2ebbc-65e7-4b47-9f32-4c2a528f4699",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2[2,0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "fa5086c2-0965-477f-a30c-1c127bd94e31",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "6"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2[2,-3]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "b6f423ce-3135-4881-b9f8-88b98cc2d472",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x2[0,0]=12 #sovrascrivo dato precedente)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "43a6ad8e-b86f-4646-8fe9-c8762388f1a9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[12,  5,  2,  4],\n",
+       "       [ 7,  6,  8,  8],\n",
+       "       [ 1,  6,  7,  7]])"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "c7f96c1a-c0e8-4707-b8fa-895b1ce6c56a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x= np.arange(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "6532fdd8-d46e-46b2-babe-9d730d6121ec",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 1, 2, 3, 4])"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x[:5] #seleziona i primi 5 elementi"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "bac40ab6-6f12-4988-b5a2-8f386ff721f1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "aa4a68bb-3b67-4929-972c-6342ad66bffd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([5, 6, 7, 8, 9])"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x[5:] #seleziona dall'elemento dopo il quinto"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "8a63e034-4cd4-4ed6-a1f9-6345052be03d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1, 2, 3, 4])"
+      ]
+     },
+     "execution_count": 30,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x[1:5:1] #parte dal secondo elemento e arriva al quinto"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "9e4eaaa8-e7a9-4d3a-92d1-8b5bac4d889b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 2, 4])"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x[0:5:2] #seleziona a passo 2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "2233eefd-e909-4bbe-ab39-c9b8e3f8ecf4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([5, 4, 3, 2, 1])"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x[5:0:-1] #inverte start con stop"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "31b50f8f-5bff-4924-9df2-208b431377ef",
+   "metadata": {},
+   "source": [
+    "# 50 minuti lezione 6"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3654c245-5b10-4f79-bf72-88f0f1c748b2",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
